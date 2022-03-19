@@ -15,6 +15,25 @@ make_wrapper( )
     make O=$BUILD_DIR -C $BUILDROOT_DIR $TARGET
 }
 
+# Support function to install the optional 'rootfs overlay files':
+install_rootfs_overlay( )
+{
+    echo "Install rootfs overlay..."
+
+    # The 'rootfs overlay' destination directory:
+    local DST_DIR=$BUILDROOT_DIR/rootfs_overlay
+
+    # The 'rootfs overlay' content is stored within this file:
+    local FILE=$BUILDROOT_DIR/rootfs_overlay.tar.gz
+
+    mkdir -p $DST_DIR &> /dev/null
+
+    # Install rootfs scripts:
+    if [ -f $FILE ]; then
+        tar -zxvf $FILE --strip-components=1 -C $DST_DIR || { echo "Extract '$FILE' fail"; exit 1; }
+    fi
+}
+
 # Support function to configure the 'buildroot' project:
 configure_buildroot( )
 {
@@ -41,13 +60,16 @@ execute( )
 {
     local DEF=$1
 
-    # 1.) Configure buildroot project:
+    # 1.) Install optional 'rootfs overlay files':
+    install_rootfs_overlay
+
+    # 2.) Configure buildroot project:
     configure_buildroot $DEF
 
-    # 2.) Download all required sources:
+    # 3.) Download all required sources:
     download_source
 
-    # 3.) Now finalize the build process by calling 'make':
+    # 4.) Now finalize the build process by calling 'make':
     make_wrapper
 }
 
