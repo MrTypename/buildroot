@@ -7,7 +7,13 @@
 # Generate version string using:
 #   git describe --match 'glibc-*' --abbrev=40 origin/release/MAJOR.MINOR/master | cut -d '-' -f 2-
 # When updating the version, please also update localedef
-GLIBC_VERSION = 2.34-109-gd64b08d5ba7ffbc9155630f4843cf2e271b1629c
+# GLIBC_VERSION = 2.34-109-gd64b08d5ba7ffbc9155630f4843cf2e271b1629c
+
+# Since 'glibc' version '2.24' minimum required kernel version is '3.2'. See also:
+# https://github.com/bminor/glibc/commit/5b4ecd3f95695ef593e4474b4ab5a117291ba5fc
+# Because target uses kernel version '2.6.36' lastest usable 'glibc' version is '2.23':
+GLIBC_VERSION =ab30899d880f9741a409cbc0d7a28399bdac21bf
+
 # Upstream doesn't officially provide an https download link.
 # There is one (https://sourceware.org/git/glibc.git) but it's not reliable,
 # sometimes the connection times out. So use an unofficial github mirror.
