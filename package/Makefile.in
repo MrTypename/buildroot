@@ -37,7 +37,10 @@ $(error BR2_TOOLCHAIN_BUILDROOT_VENDOR cannot be 'unknown'. \
 endif
 
 # Compute GNU_TARGET_NAME
-GNU_TARGET_NAME = $(ARCH)-$(TARGET_VENDOR)-$(TARGET_OS)-$(LIBC)$(ABI)
+# GNU_TARGET_NAME = $(ARCH)-$(TARGET_VENDOR)-$(TARGET_OS)-$(LIBC)$(ABI)
+
+# Explicit remove 'TARGET_VENDOR' from toolchain name to ensure name is equal to 'native' toolchain:
+GNU_TARGET_NAME = $(ARCH)-$(TARGET_OS)-$(LIBC)$(ABI)
 
 # FLAT binary format needs uclinux
 ifeq ($(BR2_BINFMT_FLAT),y)
