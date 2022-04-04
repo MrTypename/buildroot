@@ -43,3 +43,36 @@ BR2_GCC_VERSION_4_8_X=y
 BR2_PACKAGE_HOST_GDB=y
 BR2_PACKAGE_HOST_GDB_TUI=y
 BR2_PACKAGE_HOST_GDB_SIM=y
+
+# Additional target packages:
+BR2_PACKAGE_GDB=y
+BR2_GDB_VERSION_7_12=y
+BR2_PACKAGE_NANO=y
+BR2_PACKAGE_OPENSSH=y
+BR2_PACKAGE_RSYNC=y
+BR2_PACKAGE_STRACE=y
+BR2_PACKAGE_VALGRIND=y
+
+# ---------------------------------------------------------------------
+# Subsequent configuration is used to generate a QEMU environment:
+
+# Additional target / rootfs configurations:
+BR2_SYSTEM_DHCP="eth0"
+BR2_TARGET_ROOTFS_EXT2=y
+BR2_TARGET_GENERIC_ROOT_PASSWD="root"
+BR2_TARGET_GENERIC_GETTY_PORT="ttyAMA0"
+BR2_ROOTFS_OVERLAY="rootfs_overlay"
+BR2_ROOTFS_POST_BUILD_SCRIPT="scripts/fix_rootfs_permission.sh"
+
+# Kernel configuration:
+BR2_LINUX_KERNEL=y
+BR2_LINUX_KERNEL_CUSTOM_VERSION=y
+BR2_LINUX_KERNEL_CUSTOM_VERSION_VALUE="3.4.11"
+BR2_LINUX_KERNEL_USE_CUSTOM_CONFIG=y
+BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE="board/qemu/arm-vexpress/linux-3.4.11.config"
+
+# QEMU configuration:
+BR2_PACKAGE_HOST_QEMU=y
+BR2_PACKAGE_HOST_QEMU_SYSTEM_MODE=y
+BR2_PACKAGE_HOST_QEMU_LINUX_USER_MODE=y
+BR2_PACKAGE_HOST_QEMU_VDE2=y
