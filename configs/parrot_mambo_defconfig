@@ -33,8 +33,9 @@ BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_REALLY_OLD=y
 # Toolchain with 'glibc' version '2.23' is build:
 BR2_TOOLCHAIN_BUILDROOT_GLIBC=y
 
-# Toolchain with 'gcc' version '4.8.5' is build:
+# Toolchain with 'gcc' version '4.8.5' and C++ support is build:
 BR2_GCC_VERSION_4_8_X=y
+BR2_TOOLCHAIN_BUILDROOT_CXX=y
 
 # Additional host tools:
 BR2_PACKAGE_HOST_GDB=y
